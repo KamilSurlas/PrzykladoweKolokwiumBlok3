@@ -21,16 +21,30 @@ void Zbior::zwolnij()
 	}
 }
 
+void Zbior::wypelnijZbior()
+{
+	std::uniform_real_distribution<double> zakres(m_dolnaGranica, m_gornaGranica);
+	std::random_device generator;
+	for (int elem = 0; elem < m_liczbaElementow; elem++)
+		m_elementy[elem] = zakres(generator);
+}
+
+double Zbior::sumaElZbioru() const
+{
+	double suma = 0.0;
+	for (size_t i = 0; i < m_liczbaElementow; i++)
+	{
+		suma = suma + m_elementy[i];
+	}
+	return suma;
+}
+
 Zbior::Zbior(size_t liczElem, double dGran, double gGran)
 {
 	alokuj(liczElem);
 	m_dolnaGranica = dGran;
 	m_gornaGranica = gGran;
-	std::uniform_real_distribution<double> zakres(m_dolnaGranica, m_gornaGranica);
-	std::random_device generator;
-	for (int elem = 0; elem < liczElem; elem++)
-		m_elementy[elem] = zakres(generator);
-
+	wypelnijZbior();
 }
 
 void Zbior::setRozmiar(int rozmiar)
@@ -67,30 +81,17 @@ void Zbior::pokazZbior()
 
 bool Zbior::operator>(const Zbior& prawyOperand)
 {
-	double sumaA = 0.0;
-	double sumaB = 0.0;
-	for (int i = 0; i < m_liczbaElementow; i++) {
-		sumaA = sumaA + m_elementy[i];
-	}
-	for (int i = 0; i < prawyOperand.m_liczbaElementow; i++) {
-		sumaB = sumaB + prawyOperand.m_elementy[i];
-	}
-			return (sumaA > sumaB);
-	}
+	return (this->sumaElZbioru() > prawyOperand.sumaElZbioru());
+}
 	
 bool Zbior::operator<(const Zbior& prawyOperand)
 {
-	return !(this->operator>(prawyOperand));
+	return (this->sumaElZbioru() < prawyOperand.sumaElZbioru());
 }
 // konwersja formalna
 Zbior::operator double()
 {
-	double suma = 0;
-	for (size_t i = 0; i < m_liczbaElementow; i++)
-	{
-		suma += m_elementy[i];
-	}
-	return suma;
+	return this->sumaElZbioru();
 }
 // konwersja nieformalna
 Zbior Zbior::zInt(int n)

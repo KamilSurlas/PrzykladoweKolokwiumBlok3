@@ -7,6 +7,8 @@ class Zbior
 	double m_gornaGranica = 0;
 	void alokuj(int);
 	void zwolnij();
+	void wypelnijZbior();
+	double sumaElZbioru() const;
 public:
 	Zbior(size_t liczElem, double dGran, double gGran);
 	~Zbior() { 	zwolnij(); }

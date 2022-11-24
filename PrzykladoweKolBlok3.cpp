@@ -8,7 +8,7 @@ int main()
     Zbior zbior1(10,1,5);
     zbior1.pokazZbior();
     std::cout << endl;
-    zbior1.setRozmiar(5);
+    zbior1.setRozmiar(15);
     zbior1.pokazZbior();
 
     std::cout << endl;
@@ -22,6 +22,9 @@ int main()
     if (zbior2 > zbior3) cout << "Zbior 2 jest wiekszy"; else cout << "Zbior 3 jest wiekszy";
     cout << " - ";
     if (zbior2 < zbior3) cout << "Zbior 2 jest mniejszy"; else cout <<  "Zbior 3 jest mniejszy";
+    cout << endl;
+    cout << "Double ze zbioru 3 = " << double(zbior3);
+
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
